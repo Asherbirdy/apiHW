@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Api Key</title>
+
+    <style>
+        #map {
+            width: 800px;
+            height: 1800px;
+            margin: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map"></div>
+</body>
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBy5_SjUbRXayyiYVb9QaQSlRUW6CSM5Io&callback=initMap"></script>
+<script>
+    function initMap() {
+        // The location of Uluru
+        const cityhall = {lat: 25.051491931654756, lng: 121.56509707547268};
+        // The map, centered at Uluru
+        const map = new google.maps.Map(document.getElementById("map"), {
+            zoom: 15,
+            center: cityhall,
+        });
+        // The marker, positioned at Uluru
+        const marker = new google.maps.Marker({
+            position: cityhall,
+            map: map,
+            title: "台北市政府"
+        });
+    }
+
+    window.initMap = initMap;
+</script>
+
+</html>
