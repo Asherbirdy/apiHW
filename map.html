@@ -1,44 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google Api Key</title>
-
+    <title>Google Multiple Marker</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBy5_SjUbRXayyiYVb9QaQSlRUW6CSM5Io"></script>
+    <script src="https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js"></script>
     <style>
         #map {
-            width: 800px;
-            height: 1800px;
+            width: 100%;
+            height: 500px;
             margin: auto;
+        }
+
+        img {
+            width: 25px;
         }
     </style>
 </head>
 
 <body>
     <div id="map"></div>
-</body>
-<script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBy5_SjUbRXayyiYVb9QaQSlRUW6CSM5Io&callback=initMap"></script>
-<script>
-    function initMap() {
-        // The location of Uluru
-        const cityhall = {lat: 25.051491931654756, lng: 121.56509707547268};
-        // The map, centered at Uluru
-        const map = new google.maps.Map(document.getElementById("map"), {
-            zoom: 15,
-            center: cityhall,
-        });
-        // The marker, positioned at Uluru
-        const marker = new google.maps.Marker({
-            position: cityhall,
-            map: map,
-            title: "台北市政府"
-        });
-    }
 
-    window.initMap = initMap;
-</script>
+    <script>
+        const locations = [
+            {lat: 25.04305609566497, lng: 121.52482559946594},
+            {lat: 25.044540080470536, lng: 121.52337862167485},
+            {lat: 25.04430738910807, lng: 121.52475223633321},
+            {lat: 25.04273532324234, lng: 121.52264384328461},
+            {lat: 25.042374092003772, lng: 121.52649062389752},
+            {lat: 25.04416144819482, lng: 121.52441786826482}
+        ];
+
+        function initMap() {
+            const NTUB = {lat: 25.04305609566497, lng: 121.52482559946594};
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 15,
+                center: NTUB
+            });
+
+            const img = "img/placeholder.png"
+            for (let i = 0; i < locations.length; i++) {
+                const marker = new google.maps.Marker({
+                    position: locations[i],
+                    map: map,
+                    title: `地點${i}`,
+                    icon: img
+                })
+            }
+
+            const markerCluster = new markerClusterer.MarkerClusterer({map, markers});
+        }
+
+        initMap();
+    </script>
+</body>
 
 </html>
